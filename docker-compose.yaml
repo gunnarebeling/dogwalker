@@ -13,5 +13,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  api:
+    image: sha256:93933811ff28238e73c9295dea741d6b1d31d6adeecacc4c40851af88e3e1049
+    container_name: dogwalker_api
+    environment:
+      - SEQ_KEY=${SEQ_KEY}
+      - CONNECTION_STRING=Host=db;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "7237:8080"
+    depends_on:
+      - db
+  client:
+    image: 820242923371.dkr.ecr.us-east-1.amazonaws.com/dogwalker/client:latest
+    container_name: dogwalker_client
+    ports:
+      - "3000:80"  # Assuming your front-end app runs on port 80 inside the container
+
 volumes:
   postgres_data:

@@ -26,7 +26,19 @@ namespace DogWalker.Controllers
             
             return Ok(_context.Dogs);
         }
-
+        [HttpDelete("{id}")]
+        public IActionResult DeleteDog(int id)
+        {
+            Dog dog = _context.Dogs.FirstOrDefault(d => d.Id == id);
+            if (dog == null)
+            {
+                return NotFound();
+            }
+            _context.Dogs.Remove(dog);
+            _context.SaveChanges();
+            return Ok();
+        }
+        
         [HttpPost]
         public IActionResult AddDog(Dog dog)
         {
