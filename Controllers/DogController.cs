@@ -32,7 +32,8 @@ namespace DogWalker.Controllers
             Dog dog = _context.Dogs.FirstOrDefault(d => d.Id == id);
             if (dog == null)
             {
-                return NotFound();
+
+                return NotFound("cant find dog");
             }
             _context.Dogs.Remove(dog);
             _context.SaveChanges();
