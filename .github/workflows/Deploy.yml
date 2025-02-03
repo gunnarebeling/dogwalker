@@ -62,7 +62,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: dogwalker-api
+          container-name: dogwalker_api_Image
           image: 820242923371.dkr.ecr.us-east-1.amazonaws.com/dogwalker/api:latest
       
       - name: Deploy Amazon ECS task definition
