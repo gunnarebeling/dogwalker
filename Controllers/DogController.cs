@@ -33,7 +33,7 @@ namespace DogWalker.Controllers
             if (dog == null)
             {
 
-                return NotFound("cant find dog");
+                return NotFound("cant find dogs");
             }
             _context.Dogs.Remove(dog);
             _context.SaveChanges();
