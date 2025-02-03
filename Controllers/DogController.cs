@@ -47,5 +47,20 @@ namespace DogWalker.Controllers
             _context.SaveChanges();
             return Ok(dog);
         }
+        [HttpPut("{id}")]
+        public IActionResult UpdateDog(int id, Dog dog)
+        {
+            Dog dogToUpdate = _context.Dogs.FirstOrDefault(d => d.Id == id);
+            if (dogToUpdate == null)
+            {
+                return NotFound("cant find dog");
+            }
+            dogToUpdate.Name = dog.Name;
+            dogToUpdate.Breed = dog.Breed;
+            dogToUpdate.Age = dog.Age;
+            dogToUpdate.OwnerName = dog.OwnerName;
+            _context.SaveChanges();
+            return Ok(dogToUpdate);
+        }
     }
 }
